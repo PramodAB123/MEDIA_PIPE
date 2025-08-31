@@ -203,6 +203,17 @@ class HandLandmarkDetector:
                     radius = 4
                     thickness = -1
                 cv2.circle(annotated_image, landmark_px, radius, color, thickness)
+                # Draw the landmark label
+                cv2.putText(
+                    annotated_image,
+                    self.landmark_names[i],
+                    (landmark_px[0] + 5, landmark_px[1] - 5),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.4,
+                    (255, 255, 255),
+                    1,
+                    cv2.LINE_AA
+                )
         return annotated_image
 
     def _add_live_info_overlay(self, image: np.ndarray, result):
@@ -259,7 +270,6 @@ def main():
     except Exception as e:
         print(f"Live detection failed: {e}")
         print("Make sure your camera is connected and not being used by another")
-
 
 if __name__ == "__main__":
     main()
